@@ -291,7 +291,7 @@
       }
 
       tmux-create-nixos () {
-        tmux new-session -d -s nixos -c /etc/nixos -n config "sudo nvim /etc/nixos"
+        tmux new-session -d -s nixos -c /home/jff/nixos -n config "nvim /home/jff/nixos -c \"cd /home/jff/nixos\""
       }
 
       tmux-init() {
