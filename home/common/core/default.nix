@@ -26,7 +26,7 @@
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
       NEWLINE=$'\n'
-      PROMPT="%(?.%F{green}.%F{red})[%F{cyan}%n%F{white}@%F{cyan}%m%(?.%F{green}.%F{red})] %F{cyan}%~%f''${NEWLINE}%F{cyan}|%F{green}>%F{cyan}|%F{white} "
+      PROMPT="%(?.%F{green}.%F{red})[%F{cyan}%m%F{white}@%F{cyan}%n%(?.%F{green}.%F{red})] %F{cyan}%~%f''${NEWLINE}%F{cyan}|%F{green}>%F{cyan}|%F{white} "
 
       bindkey '^n' autosuggest-accept
       bindkey "\e[1;5D" backward-word
@@ -166,5 +166,6 @@
     mpv
     yt-dlp
     ytfzf
+    direnv
   ];
 }

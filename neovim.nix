@@ -30,7 +30,7 @@
 
       vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save file', silent = true })
       vim.keymap.set('n', '<leader>n', ':bn<CR>', { desc = 'Next buffer', silent = true })
-      vim.keymap.set('n', '<leader>p', ':bn<CR>', { desc = 'Next buffer', silent = true })
+      vim.keymap.set('n', '<leader>p', ':bp<CR>', { desc = 'Next buffer', silent = true })
       vim.keymap.set('n', '<leader>e', ':Ex<CR>', { desc = 'Open file explorer', silent = true })
       vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>', { desc = 'Clear search highlights', silent = true })
     '';
