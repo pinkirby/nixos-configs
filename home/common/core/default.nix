@@ -66,10 +66,15 @@
         tmux new-session -d -s nixos -c /home/jff/nixos -n config "nvim /home/jff/nixos -c \"cd /home/jff/nixos\""
       }
 
+      tmux-create-nixvim () {
+        tmux new-session -d -s nixvim -c /home/jff/Documents/repos/nixvim-config -n config "nvim /home/jff/Documents/repos/nixvim-config -c \"cd /home/jff/Documents/repos/nixvim-config\""
+      }
+
       tmux-init() {
         tmux has-session -t "settings" 2>/dev/null || tmux-create-settings
         tmux has-session -t "pc" 2>/dev/null || tmux-create-main
         tmux has-session -t "nixos" 2>/dev/null || tmux-create-nixos
+        tmux has-session -t "nixvim" 2>/dev/null || tmux-create-nixvim
       }
 
       tmux-init
