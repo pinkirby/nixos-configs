@@ -140,6 +140,13 @@
     commands = {
       mkdir = "%mkdir \"$@\"";
       touch = "%touch \"$@\"";
+      extract = ''
+        ''${{
+          for f in $fx; do
+              unzip -q "$f"
+          done
+        }}
+      '';
     };
     keybindings = {
       x = "cut";
@@ -159,7 +166,6 @@
     fastfetch
     lf
     btop
-    lazygit
     rofi
     sxiv
     pulsemixer
