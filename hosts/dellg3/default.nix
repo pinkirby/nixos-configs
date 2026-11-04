@@ -204,6 +204,7 @@
       xsel
       slock
       qmk
+      ripgrep
     ];
   };
 
