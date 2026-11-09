@@ -178,5 +178,6 @@
     yt-dlp
     ytfzf
     direnv
+    aichat
   ];
 }
