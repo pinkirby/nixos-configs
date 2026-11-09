@@ -8,11 +8,19 @@
   programs.zsh.enable = true;
   services.openssh.enable = true;
 
+  programs.bat = {
+    enable = true;
+    settings = {
+      paging = "always";
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     vim
     wget
     neovim
     less
+    bat
     man-db
     man-pages
     git
