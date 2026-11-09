@@ -130,6 +130,7 @@
 
       bind M-p command-prompt -I "attach-session -c " "%%"
       bind M-c command-prompt -I "new-window -n " "%%"
+      bind M-a command-prompt -p "Session/Chat Name: " "new-window -n '%1' 'aichat -s \"%1\"'"
       bind M-i set-option -g status
       bind e display-popup -d "#{pane_current_path}" -w 80% -h 80% -E lf
       bind M-s display-popup -d "#{pane_current_path}" -w 80% -h 80% -E zsh
