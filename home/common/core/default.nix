@@ -4,7 +4,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
-    PAGER = "less";
+    PAGER = "bat";
   };
 
   programs.zsh = {
@@ -74,12 +74,17 @@
         tmux new-session -d -s aichat -c /home/jff/Documents/gemini -n aichat "aichat -s tmp"
       }
 
+      tmux-create-emergent-mind () {
+        tmux new-session -d -s emergent-mind -c /home/jff/Documents/repos/EmergentMind -n config "lf /home/jff/Documents/repos/EmergentMind"
+      }
+
       tmux-init() {
         tmux has-session -t "settings" 2>/dev/null || tmux-create-settings
         tmux has-session -t "pc" 2>/dev/null || tmux-create-main
         tmux has-session -t "nixos" 2>/dev/null || tmux-create-nixos
         tmux has-session -t "nixvim" 2>/dev/null || tmux-create-nixvim
         tmux has-session -t "aichat" 2>/dev/null || tmux-create-aichat
+        tmux has-session -t "emergent-mind" 2>/dev/null || tmux-create-emergent-mind
       }
 
       tmux-init
@@ -184,5 +189,6 @@
     ytfzf
     direnv
     aichat
+    bat
   ];
 }
