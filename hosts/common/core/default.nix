@@ -12,6 +12,7 @@
     enable = true;
     settings = {
       paging = "always";
+      wrap = "never";
     };
   };
 

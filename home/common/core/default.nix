@@ -1,4 +1,40 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+
+let
+  helpFileName = ".tmux-custom-bindings-help";
+  
+  tmux-default-sessions = [
+
+  ];
+
+  customBindings = [
+    { key = "M-p"; cmd = "command-prompt -I \"attach-session -c \" \"%%\""; desc = "Change default [P]ath of the current session"; }
+    { key = "M-c"; cmd = "command-prompt -I \"new-window -n \" \"%%\""; desc = "[C]reate a named window"; }
+    { key = "M-a"; cmd = "command-prompt -p \"Session/Chat Name: \" \"new-window -n '%1' 'aichat -s \\\"%1\\\"'\""; desc = "Create new [A]I chat"; }
+    { key = "M-i"; cmd = "set-option -g status"; desc = "Toggle status bar [I]nformation"; }
+    { key = "M-e"; cmd = "display-popup -d \"#{pane_current_path}\" -w 80% -h 80% -E lf"; desc = "Open file [E]xplorer"; }
+    { key = "Enter"; cmd = "display-popup -d \"#{pane_current_path}\" -w 80% -h 80% -E zsh"; desc = "Open [S]hell"; }
+    { key = "y"; cmd = "copy"; desc = "Enter tmux copy mode"; }
+    { key = "\\;"; cmd = "command-prompt"; desc = "Open tmux command prompt"; }
+    { key = "S-Right"; cmd = "split -h"; desc = "Split window vertically (Right)"; }
+    { key = "S-Left"; cmd = "split -bh"; desc = "Split window vertically (Left)"; }
+    { key = "S-Up"; cmd = "split -bv"; desc = "Split window horizontally (Up)"; }
+    { key = "S-Down"; cmd = "split -v"; desc = "Split window horizontally (Down)"; }
+    { key = "M-r"; cmd = "source-file ~/.config/tmux/tmux.conf \\; display-message \"Tmux config reloaded.\""; desc = "[R]eload config"; }
+    { key = "M-h"; cmd = "display-popup -w 80% -h 80% -E \"bat ~/${helpFileName}\""; desc = "Display [H]elp for custom bindings"; }
+    { key = "M-s"; cmd = "choose-tree -s -Z"; desc = "Choose a [S]ession"; }
+    { key = "M-t"; cmd = "clock-mode"; desc = "Display [T]ime"; }
+    { key = "M-f"; cmd = "display-message"; desc = "Display window in[F]ormation"; }
+    { key = "k"; cmd = "next-layout"; desc = "cycle through pane layouts"; }
+  ];
+
+  tmuxConfSnippet = builtins.concatStringsSep "\n"
+    (map (b: "bind ${b.key} ${b.cmd} # ${b.desc}") customBindings);
+
+  helpFileContent = builtins.concatStringsSep "\n"
+    ([ "Custom Keybindings Cheat Sheet" ] ++ [ (pkgs.lib.strings.replicate 100 "-") ] ++ (map (b: "Prefix + ${b.key} : ${b.desc}") customBindings));
+in
+{
   home.stateVersion = "26.05";
 
   home.sessionVariables = {
@@ -110,6 +146,11 @@
     };
   };
 
+  home.file."${helpFileName}" = {
+    enable = true;
+    text = helpFileContent;
+  };
+
   programs.tmux = {
     enable = true;
     terminal = "tmux-256color";
@@ -128,21 +169,7 @@
 
       set-window-option -g mode-keys vi
 
-      bind M-p command-prompt -I "attach-session -c " "%%"
-      bind M-c command-prompt -I "new-window -n " "%%"
-      bind M-a command-prompt -p "Session/Chat Name: " "new-window -n '%1' 'aichat -s \"%1\"'"
-      bind M-i set-option -g status
-      bind e display-popup -d "#{pane_current_path}" -w 80% -h 80% -E lf
-      bind M-s display-popup -d "#{pane_current_path}" -w 80% -h 80% -E zsh
-      bind y copy
-      bind \; command-prompt
-
-      bind S-Right split -h
-      bind S-Left split -bh
-      bind S-Up split -bv
-      bind S-Down split -v
-
-      bind r source-file ~/.config/tmux/tmux.conf \; display-message "Tmux config reloaded."
+      ${tmuxConfSnippet}
     '';
   };
 
@@ -173,12 +200,32 @@
 
   programs.feh.enable = true;
 
+
+  xdg.desktopEntries.nsxiv = {
+    name = "nsxiv";
+    exec = "nsxiv %f";
+    mimeType = [
+      "image/png"
+      "image/jpeg"
+      "image/gif"
+      "image/webp"
+    ];
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "image/png" = "nsxiv.desktop";
+      "image/jpeg" = "nsxiv.desktop";
+    };
+  };
+
   home.packages = with pkgs; [
     fastfetch
     lf
     btop
     rofi
-    sxiv
+    nsxiv
     pulsemixer
     microsoft-edge
     flameshot
@@ -190,5 +237,6 @@
     ytfzf
     direnv
     aichat
+    glow
   ];
 }

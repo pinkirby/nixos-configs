@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   imports = [
     ../common/core/default.nix
-    ./hardware-configuration.nix
+    ../common/core/hardware-configuration.nix
   ];
 
   networking.hostName = "dellg3";
