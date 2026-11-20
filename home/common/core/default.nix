@@ -25,7 +25,9 @@ let
     { key = "M-s"; cmd = "choose-tree -s -Z"; desc = "Choose a [S]ession"; }
     { key = "M-t"; cmd = "clock-mode"; desc = "Display [T]ime"; }
     { key = "M-f"; cmd = "display-message"; desc = "Display window in[F]ormation"; }
-    { key = "k"; cmd = "next-layout"; desc = "cycle through pane layouts"; }
+    { key = "k"; cmd = "next-layout"; desc = "Cycle through pane layouts"; }
+    { key = "l"; cmd = "next-layout"; desc = "Next window"; }
+    { key = "h"; cmd = "next-layout"; desc = "Previous window"; }
   ];
 
   tmuxConfSnippet = builtins.concatStringsSep "\n"
@@ -114,6 +116,11 @@ in
         tmux new-session -d -s emergent-mind -c /home/jff/Documents/repos/EmergentMind -n config "lf /home/jff/Documents/repos/EmergentMind"
       }
 
+      tmux-create-rpg () {
+        tmux new-session -d -s rpg -c /home/jff/Documents/repos/martin-rpg-player-rules -n rules "nvim /home/jff/Documents/repos/martin-rpg-player-rules/rules.md -c \"cd /home/jff/Documents/repos/martin-rpg-player-rules\""
+        tmux new-window -d -t rpg -n md-cheat-sheet "bat /home/jff/Documents/repos/markdown-here.wiki/Markdown-Cheatsheet.md"
+      }
+
       tmux-init() {
         tmux has-session -t "settings" 2>/dev/null || tmux-create-settings
         tmux has-session -t "pc" 2>/dev/null || tmux-create-main
@@ -121,6 +128,7 @@ in
         tmux has-session -t "nixvim" 2>/dev/null || tmux-create-nixvim
         tmux has-session -t "aichat" 2>/dev/null || tmux-create-aichat
         tmux has-session -t "emergent-mind" 2>/dev/null || tmux-create-emergent-mind
+        tmux has-session -t "rpg" 2>/dev/null || tmux-create-rpg
       }
 
       tmux-init
