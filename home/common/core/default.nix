@@ -26,8 +26,8 @@ let
     { key = "M-t"; cmd = "clock-mode"; desc = "Display [T]ime"; }
     { key = "M-f"; cmd = "display-message"; desc = "Display window in[F]ormation"; }
     { key = "k"; cmd = "next-layout"; desc = "Cycle through pane layouts"; }
-    { key = "l"; cmd = "next-layout"; desc = "Next window"; }
-    { key = "h"; cmd = "next-layout"; desc = "Previous window"; }
+    { key = "l"; cmd = "next"; desc = "Next window"; }
+    { key = "h"; cmd = "previous-window"; desc = "Previous window"; }
   ];
 
   tmuxConfSnippet = builtins.concatStringsSep "\n"
