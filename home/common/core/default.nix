@@ -238,5 +238,6 @@ in
     direnv
     aichat
     glow
+    gh
   ];
 }
