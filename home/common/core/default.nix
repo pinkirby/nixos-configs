@@ -133,7 +133,7 @@ in
       }
 
       tmux-create-aichat () {
-        tmux new-session -d -s aichat -c /home/jff/Documents/gemini -n aichat "aichat -s tmp"
+        tmux new-session -d -s aichat -c /home/jff/Documents/gemini -n aichat "aichat"
       }
 
       tmux-create-emergent-mind () {
@@ -201,16 +201,16 @@ in
 
       set-window-option -g mode-keys vi
 
-      set -g @workspace_0 = ""
-      set -g @workspace_1 = "${tmuxDefaultSessions.pc}"
-      set -g @workspace_2 = "${tmuxDefaultSessions.nixos}"
-      set -g @workspace_3 = "${tmuxDefaultSessions.rpg}"
-      set -g @workspace_4 = "${tmuxDefaultSessions.nixvim}"
-      set -g @workspace_5 = "${tmuxDefaultSessions.emergentMind}"
-      set -g @workspace_6 = "${tmuxDefaultSessions.aichat}"
-      set -g @workspace_7 = ""
-      set -g @workspace_8 = "${tmuxDefaultSessions.settings}"
-      set -g @workspace_9 = ""
+      set -g @workspace_0 ""
+      set -g @workspace_1 "${tmuxDefaultSessions.pc}"
+      set -g @workspace_2 "${tmuxDefaultSessions.nixos}"
+      set -g @workspace_3 "${tmuxDefaultSessions.rpg}"
+      set -g @workspace_4 "${tmuxDefaultSessions.nixvim}"
+      set -g @workspace_5 "${tmuxDefaultSessions.emergentMind}"
+      set -g @workspace_6 "${tmuxDefaultSessions.aichat}"
+      set -g @workspace_7 ""
+      set -g @workspace_8 "${tmuxDefaultSessions.settings}"
+      set -g @workspace_9 ""
 
       ${tmuxConfSnippet}
     '';
