@@ -2,10 +2,16 @@
 
 let
   helpFileName = ".tmux-custom-bindings-help";
-  
-  tmux-default-sessions = [
 
-  ];
+  tmuxDefaultSessions = {
+    settings = "settings";
+    pc = "pc";
+    nixos = "nixos";
+    nixvim = "nixvim";
+    aichat = "aichat";
+    emergentMind = "emergent-mind";
+    rpg = "rpg";
+  };
 
   customBindings = [
     { key = "M-p"; cmd = "command-prompt -I \"attach-session -c \" \"%%\""; desc = "Change default [P]ath of the current session"; }
@@ -28,6 +34,14 @@ let
     { key = "k"; cmd = "next-layout"; desc = "Cycle through pane layouts"; }
     { key = "l"; cmd = "next"; desc = "Next window"; }
     { key = "h"; cmd = "previous-window"; desc = "Previous window"; }
+    { key = "n"; cmd = "run-shell 'TGT=\"$(tmux show-options -gv @workspace_1)\"; if [ -n \"$TGT\" ]; then tmux switch-client -t \"$TGT\"; fi'"; desc = "Switch to session #1"; }
+    { key = "e"; cmd = "run-shell 'TGT=\"$(tmux show-options -gv @workspace_2)\"; if [ -n \"$TGT\" ]; then tmux switch-client -t \"$TGT\"; fi'"; desc = "Switch to session #2"; }
+    { key = "i"; cmd = "run-shell 'TGT=\"$(tmux show-options -gv @workspace_3)\"; if [ -n \"$TGT\" ]; then tmux switch-client -t \"$TGT\"; fi'"; desc = "Switch to session #3"; }
+    { key = "o"; cmd = "run-shell 'TGT=\"$(tmux show-options -gv @workspace_4)\"; if [ -n \"$TGT\" ]; then tmux switch-client -t \"$TGT\"; fi'"; desc = "Switch to session #4"; }
+    { key = "t"; cmd = "run-shell 'TGT=\"$(tmux show-options -gv @workspace_5)\"; if [ -n \"$TGT\" ]; then tmux switch-client -t \"$TGT\"; fi'"; desc = "Switch to session #5"; }
+    { key = "s"; cmd = "run-shell 'TGT=\"$(tmux show-options -gv @workspace_6)\"; if [ -n \"$TGT\" ]; then tmux switch-client -t \"$TGT\"; fi'"; desc = "Switch to session #6"; }
+    { key = "r"; cmd = "run-shell 'TGT=\"$(tmux show-options -gv @workspace_7)\"; if [ -n \"$TGT\" ]; then tmux switch-client -t \"$TGT\"; fi'"; desc = "Switch to session #7"; }
+    { key = "a"; cmd = "run-shell 'TGT=\"$(tmux show-options -gv @workspace_8)\"; if [ -n \"$TGT\" ]; then tmux switch-client -t \"$TGT\"; fi'"; desc = "Switch to session #8"; }
   ];
 
   tmuxConfSnippet = builtins.concatStringsSep "\n"
@@ -43,6 +57,16 @@ in
     EDITOR = "nvim";
     VISUAL = "nvim";
     PAGER = "bat";
+    TMUX_WORKSPACE_0 = "";
+    TMUX_WORKSPACE_1 = tmuxDefaultSessions.pc;
+    TMUX_WORKSPACE_2 = tmuxDefaultSessions.nixos;
+    TMUX_WORKSPACE_3 = tmuxDefaultSessions.rpg;
+    TMUX_WORKSPACE_4 = tmuxDefaultSessions.nixvim;
+    TMUX_WORKSPACE_5 = tmuxDefaultSessions.emergentMind;
+    TMUX_WORKSPACE_6 = tmuxDefaultSessions.aichat;
+    TMUX_WORKSPACE_7 = "";
+    TMUX_WORKSPACE_8 = tmuxDefaultSessions.settings;
+    TMUX_WORKSPACE_9 = "";
   };
 
   programs.zsh = {
@@ -177,6 +201,17 @@ in
 
       set-window-option -g mode-keys vi
 
+      set -g @workspace_0 = ""
+      set -g @workspace_1 = "${tmuxDefaultSessions.pc}"
+      set -g @workspace_2 = "${tmuxDefaultSessions.nixos}"
+      set -g @workspace_3 = "${tmuxDefaultSessions.rpg}"
+      set -g @workspace_4 = "${tmuxDefaultSessions.nixvim}"
+      set -g @workspace_5 = "${tmuxDefaultSessions.emergentMind}"
+      set -g @workspace_6 = "${tmuxDefaultSessions.aichat}"
+      set -g @workspace_7 = ""
+      set -g @workspace_8 = "${tmuxDefaultSessions.settings}"
+      set -g @workspace_9 = ""
+
       ${tmuxConfSnippet}
     '';
   };
@@ -247,5 +282,6 @@ in
     aichat
     glow
     gh
+    discord
   ];
 }
